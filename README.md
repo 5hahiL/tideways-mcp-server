@@ -15,9 +15,8 @@ A Model Context Protocol (MCP) server that enables AI assistants to query [Tidew
 - **Conversational Performance Insights**: Get performance data in natural language format optimized for AI assistants
 - **AI Assistant Integration**: Works with Claude Desktop, Cursor, Claude Code, and other MCP-compatible tools
 - **Real-time Performance Metrics**: Query current performance data with configurable rate limiting
-- **Trace Drill-Down**: List traces, then drill into individual traces for full callgraph, SQL queries, and custom annotations
-- **Error Drill-Down**: List issues, then drill into individual errors for complete stack traces and occurrence history
-- **Custom Annotation Support**: Filter traces by `$span->annotate()` values and view annotations in trace detail
+- **Trace Analysis**: List and filter traces with layer breakdown, bottleneck detection, and response time analysis
+- **Custom Annotation Support**: Filter traces by `$span->annotate()` values
 - **Issue Analysis**: Retrieve and analyze errors, exceptions, and performance issues
 - **Robust Error Handling**: Comprehensive error handling with user-friendly messages
 
@@ -157,12 +156,6 @@ Once configured, you can ask your AI assistant questions like:
 - "Analyze dependency injection overhead in my application"
 - "Detect redundant database calls and suggest caching strategies"
 
-#### Drill-Down Analysis
-- "Get the slowest traces from the last hour, then show me full detail on the worst one"
-- "List open errors, then drill into the first one and show me the stack trace"
-- "Find traces with the 'checkout' annotation and analyze them"
-- "Get trace detail for trace ID abc123 and explain the bottleneck"
-
 #### Performance Optimization Suggestions
 - "Recommend performance improvements for my slowest endpoints"
 - "Analyze my SQL queries and suggest indexing strategies"
@@ -266,38 +259,6 @@ Analyze individual trace samples for detailed bottleneck identification and perf
 ```
 
 **Returns:** Raw trace data from Tideways including per-request timing, layer breakdown (SQL, Redis, HTTP, etc.), bottleneck flags, and callgraph data when `has_callgraph: true` is set. Use `has_callgraph: true` for the deepest debugging detail.
-
-### `get_trace_detail`
-
-Fetch the full detail of a single trace by ID, including callgraph spans, custom annotations, SQL queries, cache calls, and timing breakdown per layer. Use after `get_traces` to drill into a specific slow request.
-
-**Parameters:**
-- `trace_id` (required): The unique trace ID from a `get_traces` result (the `id` field)
-
-**Conversational Examples:**
-```
-"Get the full detail for trace abc123"
-"Show me the callgraph and SQL queries for the slowest trace"
-"Drill into that trace and show me what's slow"
-```
-
-**Returns:** Full trace detail including callgraph spans with custom annotations (`$span->annotate()` values), SQL query breakdown, cache calls, and per-layer timing.
-
-### `get_error_detail`
-
-Fetch the full detail of a single error or issue by ID, including complete stack traces, affected transactions, and occurrence history. Use after `get_issues` to drill into a specific error.
-
-**Parameters:**
-- `error_id` (required): The unique issue ID from a `get_issues` result (the `id` field)
-
-**Conversational Examples:**
-```
-"Get full details for error xyz789"
-"Show me the complete stack trace for that exception"
-"Drill into the first error and tell me what's causing it"
-```
-
-**Returns:** Full error detail including complete stack traces, affected transactions, occurrence timestamps, and HTTP request context.
 
 ### `get_historical_data`
 

@@ -7,8 +7,6 @@ import {
   TidewaysIssuesResponse,
   TidewaysTracesResponse,
   TidewaysHistoryResponse,
-  TidewaysTraceDetail,
-  TidewaysErrorDetail,
   GetPerformanceMetricsParams,
   GetPerformanceSummaryParams,
   GetTracesParams,
@@ -215,15 +213,6 @@ export class TidewaysClient {
     return this.fetch<TidewaysTracesResponse>(endpoint, params);
   }
 
-  async getTraceDetail(traceId: string): Promise<TidewaysTraceDetail> {
-    const endpoint = `/${this.config.organization}/${this.config.project}/traces/${encodeURIComponent(traceId)}`;
-    return this.fetch<TidewaysTraceDetail>(endpoint);
-  }
-
-  async getErrorDetail(errorId: string): Promise<TidewaysErrorDetail> {
-    const endpoint = `/${this.config.organization}/${this.config.project}/issues/${encodeURIComponent(errorId)}`;
-    return this.fetch<TidewaysErrorDetail>(endpoint);
-  }
 
   async getHistoricalData(date: string, granularity: string = 'day'): Promise<TidewaysHistoryResponse> {
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;

@@ -30,10 +30,4 @@ export interface GetTracesParams {
     sort_order?: 'ASC' | 'DESC';
     annotation?: string;
 }
-export interface GetTraceDetailParams {
-    trace_id: string;
-}
-export interface GetErrorDetailParams {
-    error_id: string;
-}
 //# sourceMappingURL=mcp.d.ts.map

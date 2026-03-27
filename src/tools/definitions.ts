@@ -164,35 +164,5 @@ export function getToolDefinitions(): Tool[] {
         required: [],
       },
     },
-    {
-      name: 'get_trace_detail',
-      description:
-        'Fetch the full detail of a single trace by ID, including callgraph spans, custom annotations, SQL queries, cache calls, and timing breakdown per layer. Use after get_traces to drill into a specific slow request.',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          trace_id: {
-            type: 'string',
-            description: 'The unique trace ID from a get_traces result (the "id" field).',
-          },
-        },
-        required: ['trace_id'],
-      },
-    },
-    {
-      name: 'get_error_detail',
-      description:
-        'Fetch the full detail of a single error or issue by ID, including complete stack traces, affected transactions, and occurrence history. Use after get_issues to drill into a specific error.',
-      inputSchema: {
-        type: 'object',
-        properties: {
-          error_id: {
-            type: 'string',
-            description: 'The unique issue ID from a get_issues result (the "id" field).',
-          },
-        },
-        required: ['error_id'],
-      },
-    },
   ];
 }

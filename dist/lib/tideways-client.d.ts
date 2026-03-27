@@ -1,4 +1,4 @@
-import { TidewaysConfig, TidewaysPerformanceData, TidewaysPerformanceSummaryData, TidewaysIssuesResponse, TidewaysTracesResponse, TidewaysHistoryResponse, TidewaysTraceDetail, TidewaysErrorDetail, GetPerformanceMetricsParams, GetPerformanceSummaryParams, GetTracesParams, GetIssuesParams } from '../types/index.js';
+import { TidewaysConfig, TidewaysPerformanceData, TidewaysPerformanceSummaryData, TidewaysIssuesResponse, TidewaysTracesResponse, TidewaysHistoryResponse, GetPerformanceMetricsParams, GetPerformanceSummaryParams, GetTracesParams, GetIssuesParams } from '../types/index.js';
 export declare class TidewaysClient {
     private client;
     private config;
@@ -10,8 +10,6 @@ export declare class TidewaysClient {
     getPerformanceSummary(params?: GetPerformanceSummaryParams): Promise<TidewaysPerformanceSummaryData>;
     getIssues(params?: GetIssuesParams): Promise<TidewaysIssuesResponse>;
     getTraces(params?: GetTracesParams): Promise<TidewaysTracesResponse>;
-    getTraceDetail(traceId: string): Promise<TidewaysTraceDetail>;
-    getErrorDetail(errorId: string): Promise<TidewaysErrorDetail>;
     getHistoricalData(date: string, granularity?: string): Promise<TidewaysHistoryResponse>;
     healthCheck(): Promise<{
         status: 'healthy' | 'unhealthy';

@@ -35,11 +35,3 @@ export interface GetTracesParams {
   annotation?: string; // Filter by custom annotation value
 }
 
-export interface GetTraceDetailParams {
-  trace_id: string; // Unique trace identifier (from get_traces results)
-}
-
-export interface GetErrorDetailParams {
-  error_id: string; // Unique issue/error identifier (from get_issues results)
-}
-
