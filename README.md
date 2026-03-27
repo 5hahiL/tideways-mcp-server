@@ -435,7 +435,7 @@ Error: MCP server not responding or connection failed
 - Verify MCP configuration file syntax is correct
 - Check that the server command path is correct
 - Ensure environment variables are properly set in MCP config
-- Try running the server manually first: `npx tideways-mcp-server`
+- Try running the server manually first: `npx tideways-mcp`
 
 ### Debug Mode
 
@@ -443,7 +443,7 @@ Enable debug logging for detailed troubleshooting:
 
 ```bash
 # When running directly
-LOG_LEVEL=debug npx tideways-mcp-server
+LOG_LEVEL=debug npx tideways-mcp
 
 # In MCP configuration, add to env:
 {

@@ -1,12 +1,12 @@
 {
-  "name": "tideways-mcp-server",
+  "name": "tideways-mcp",
   "version": "1.0.2",
   "description": "MCP server for Tideways performance monitoring integration with AI assistants",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
   "bin": {
-    "tideways-mcp-server": "./bin/cli.js"
+    "tideways-mcp": "./bin/cli.js"
   },
   "files": [
     "dist/**/*",
