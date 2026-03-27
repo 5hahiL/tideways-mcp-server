@@ -11,7 +11,7 @@ import { loadConfig, ServerConfig } from './config/index.js';
 import { ErrorHandler, TidewaysAPIError } from './lib/errors.js';
 import { getToolDefinitions } from './tools/definitions.js';
 import { executeTool } from './tools/registry.js';
-import packageJson from '../package.json';
+import packageJson from '../package.json' with { type: 'json' };
 
 const SERVER_VERSION: string = (packageJson as unknown as { version: string }).version;
 

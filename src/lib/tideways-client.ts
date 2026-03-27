@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import packageJson from '../../package.json';
+import packageJson from '../../package.json' with { type: 'json' };
 import {
   TidewaysConfig,
   TidewaysPerformanceData,
