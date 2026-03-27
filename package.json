@@ -51,7 +51,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "Mouhammed Diop",
+  "author": "Shahil",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.5.0",
@@ -86,10 +86,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abuhamza/tideways-mcp-server.git"
+    "url": "git+https://github.com/5hahiL/tideways-mcp-server.git"
   },
   "bugs": {
-    "url": "https://github.com/abuhamza/tideways-mcp-server/issues"
+    "url": "https://github.com/5hahiL/tideways-mcp-server/issues"
   },
-  "homepage": "https://github.com/abuhamza/tideways-mcp-server#readme"
+  "homepage": "https://github.com/5hahiL/tideways-mcp-server#readme"
 }
