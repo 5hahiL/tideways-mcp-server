@@ -18,7 +18,9 @@ describe('Tool Definitions', () => {
       expect(toolNames).toContain('get_issues');
       expect(toolNames).toContain('get_traces');
       expect(toolNames).toContain('get_historical_data');
-      expect(tools).toHaveLength(5);
+      expect(toolNames).toContain('get_trace_detail');
+      expect(toolNames).toContain('get_error_detail');
+      expect(tools).toHaveLength(7);
     });
 
     it('should have valid schema for get_performance_metrics', () => {

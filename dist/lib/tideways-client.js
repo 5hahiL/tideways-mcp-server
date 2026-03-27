@@ -155,6 +155,14 @@ export class TidewaysClient {
         const endpoint = `/${this.config.organization}/${this.config.project}/traces`;
         return this.fetch(endpoint, params);
     }
+    async getTraceDetail(traceId) {
+        const endpoint = `/${this.config.organization}/${this.config.project}/traces/${encodeURIComponent(traceId)}`;
+        return this.fetch(endpoint);
+    }
+    async getErrorDetail(errorId) {
+        const endpoint = `/${this.config.organization}/${this.config.project}/issues/${encodeURIComponent(errorId)}`;
+        return this.fetch(endpoint);
+    }
     async getHistoricalData(date, granularity = 'day') {
         const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
         if (!dateRegex.test(date)) {

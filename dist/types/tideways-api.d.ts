@@ -104,6 +104,48 @@ export interface TraceLayer {
 export interface TidewaysTracesResponse {
     traces: TidewaysTrace[];
 }
+export interface CallgraphSpan {
+    id: string;
+    parent_id?: string;
+    name: string;
+    category: string;
+    duration_ms: number;
+    annotations?: Record<string, string | number | boolean>;
+    children?: CallgraphSpan[];
+}
+export interface TidewaysTraceDetail extends TidewaysTrace {
+    callgraph?: {
+        spans: CallgraphSpan[];
+    };
+    annotations?: Record<string, string | number | boolean>;
+    sql_queries?: Array<{
+        query: string;
+        duration_ms: number;
+        count?: number;
+    }>;
+    cache_calls?: Array<{
+        command: string;
+        duration_ms: number;
+        count?: number;
+    }>;
+}
+export interface TidewaysErrorDetail extends TidewaysIssue {
+    stackTraces?: Array<{
+        occurred_at: string;
+        stack: Array<{
+            file: string;
+            function?: string;
+            line: number;
+            code?: string;
+        }>;
+    }>;
+    affectedUsers?: number;
+    httpRequests?: Array<{
+        url: string;
+        method: string;
+        status_code: number;
+    }>;
+}
 export interface TidewaysHistoryResponse {
     _links: {
         self: {

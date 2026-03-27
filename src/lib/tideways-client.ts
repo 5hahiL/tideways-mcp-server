@@ -7,8 +7,12 @@ import {
   TidewaysIssuesResponse,
   TidewaysTracesResponse,
   TidewaysHistoryResponse,
+  TidewaysTraceDetail,
+  TidewaysErrorDetail,
   GetPerformanceMetricsParams,
   GetPerformanceSummaryParams,
+  GetTracesParams,
+  GetIssuesParams,
 } from '../types/index.js';
 import { ErrorHandler, TidewaysAPIError } from './errors.js';
 import { logger } from './logger.js';
@@ -192,11 +196,7 @@ export class TidewaysClient {
     return this.fetch<TidewaysPerformanceSummaryData>(endpoint, apiParams);
   }
 
-  async getIssues(params?: {
-    issue_type?: string;
-    status?: string;
-    page?: number;
-  }): Promise<TidewaysIssuesResponse> {
+  async getIssues(params?: GetIssuesParams): Promise<TidewaysIssuesResponse> {
     const apiParams: Record<string, any> = {
       status: params?.status || 'open',
       page: params?.page || 1,
@@ -210,21 +210,19 @@ export class TidewaysClient {
     return this.fetch<TidewaysIssuesResponse>(endpoint, apiParams);
   }
 
-  async getTraces(params?: {
-    env?: string;
-    s?: string;
-    transaction_name?: string;
-    has_callgraph?: boolean;
-    search?: string;
-    min_date?: string;
-    max_date?: string;
-    min_response_time_ms?: number;
-    max_response_time_ms?: number;
-    sort_by?: string;
-    sort_order?: string;
-  }): Promise<TidewaysTracesResponse> {
+  async getTraces(params?: GetTracesParams): Promise<TidewaysTracesResponse> {
     const endpoint = `/${this.config.organization}/${this.config.project}/traces`;
     return this.fetch<TidewaysTracesResponse>(endpoint, params);
+  }
+
+  async getTraceDetail(traceId: string): Promise<TidewaysTraceDetail> {
+    const endpoint = `/${this.config.organization}/${this.config.project}/traces/${encodeURIComponent(traceId)}`;
+    return this.fetch<TidewaysTraceDetail>(endpoint);
+  }
+
+  async getErrorDetail(errorId: string): Promise<TidewaysErrorDetail> {
+    const endpoint = `/${this.config.organization}/${this.config.project}/issues/${encodeURIComponent(errorId)}`;
+    return this.fetch<TidewaysErrorDetail>(endpoint);
   }
 
   async getHistoricalData(date: string, granularity: string = 'day'): Promise<TidewaysHistoryResponse> {

@@ -87,15 +87,8 @@ async function main() {
   }
 }
 
-process.on('SIGINT', () => {
-  console.log('\nShutting down Tideways MCP Server...');
-  process.exit(0);
-});
-
-process.on('SIGTERM', () => {
-  console.log('\nShutting down Tideways MCP Server...');
-  process.exit(0);
-});
+// Signal handlers are registered by server.ts for graceful shutdown.
+// Do not duplicate them here — it races with the server's async teardown.
 
 main().catch(error => {
   console.error('Fatal error:', error.message);
