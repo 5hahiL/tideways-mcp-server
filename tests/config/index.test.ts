@@ -1,4 +1,4 @@
-import { loadConfig } from '../../src/config/index.js';
+import { loadConfig, validateCredentials } from '../../src/config/index.js';
 
 describe('Configuration Management', () => {
   const originalEnv = process.env;
@@ -46,28 +46,31 @@ describe('Configuration Management', () => {
       expect(config.port).toBe(8080);
     });
 
-    it('should throw error for missing token', () => {
+    it('should allow missing credentials for tool listing', () => {
       delete process.env.TIDEWAYS_TOKEN;
       process.env.TIDEWAYS_ORG = 'test-org';
       process.env.TIDEWAYS_PROJECT = 'test-project';
 
-      expect(() => loadConfig()).toThrow('TIDEWAYS_TOKEN environment variable is required');
+      const config = loadConfig();
+      expect(config.token).toBe('');
     });
 
-    it('should throw error for missing organization', () => {
+    it('should allow missing organization for tool listing', () => {
       process.env.TIDEWAYS_TOKEN = 'validToken123456789';
       delete process.env.TIDEWAYS_ORG;
       process.env.TIDEWAYS_PROJECT = 'test-project';
 
-      expect(() => loadConfig()).toThrow('TIDEWAYS_ORG environment variable is required');
+      const config = loadConfig();
+      expect(config.organization).toBe('');
     });
 
-    it('should throw error for missing project', () => {
+    it('should allow missing project for tool listing', () => {
       process.env.TIDEWAYS_TOKEN = 'validToken123456789';
       process.env.TIDEWAYS_ORG = 'test-org';
       delete process.env.TIDEWAYS_PROJECT;
 
-      expect(() => loadConfig()).toThrow('TIDEWAYS_PROJECT environment variable is required');
+      const config = loadConfig();
+      expect(config.project).toBe('');
     });
 
     it('should validate numeric values', () => {
@@ -153,6 +156,36 @@ describe('Configuration Management', () => {
 
       const config = loadConfig();
       expect(config.rateLimit).toBe(2500);
+    });
+  });
+
+  describe('validateCredentials', () => {
+    it('should throw when token is missing', () => {
+      delete process.env.TIDEWAYS_TOKEN;
+      process.env.TIDEWAYS_ORG = 'test-org';
+      process.env.TIDEWAYS_PROJECT = 'test-project';
+
+      const config = loadConfig();
+      expect(() => validateCredentials(config)).toThrow('TIDEWAYS_TOKEN');
+    });
+
+    it('should throw when multiple credentials are missing', () => {
+      delete process.env.TIDEWAYS_TOKEN;
+      delete process.env.TIDEWAYS_ORG;
+      process.env.TIDEWAYS_PROJECT = 'test-project';
+
+      const config = loadConfig();
+      expect(() => validateCredentials(config)).toThrow('TIDEWAYS_TOKEN');
+      expect(() => validateCredentials(config)).toThrow('TIDEWAYS_ORG');
+    });
+
+    it('should not throw when all credentials are present', () => {
+      process.env.TIDEWAYS_TOKEN = 'validToken123456789';
+      process.env.TIDEWAYS_ORG = 'test-org';
+      process.env.TIDEWAYS_PROJECT = 'test-project';
+
+      const config = loadConfig();
+      expect(() => validateCredentials(config)).not.toThrow();
     });
   });
 

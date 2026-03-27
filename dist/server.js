@@ -3,7 +3,7 @@ import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js'
 import { CallToolRequestSchema, ListToolsRequestSchema, McpError, } from '@modelcontextprotocol/sdk/types.js';
 import { TidewaysClient } from './lib/tideways-client.js';
 import { logger } from './lib/logger.js';
-import { loadConfig } from './config/index.js';
+import { loadConfig, validateCredentials } from './config/index.js';
 import { ErrorHandler, TidewaysAPIError } from './lib/errors.js';
 import { getToolDefinitions } from './tools/definitions.js';
 import { executeTool } from './tools/registry.js';
@@ -36,6 +36,7 @@ export class TidewaysMCPServer {
             const { name, arguments: args } = request.params;
             logger.info('Tool called', { toolName: name, arguments: args });
             try {
+                validateCredentials(this.config);
                 const result = await executeTool(name, args, this.tidewaysClient);
                 return {
                     content: [
@@ -65,19 +66,24 @@ export class TidewaysMCPServer {
             organization: this.config.organization,
             project: this.config.project,
         });
-        try {
-            const health = await this.tidewaysClient.healthCheck();
-            if (health.status === 'healthy') {
-                logger.info('Tideways API connection verified');
+        if (this.config.token && this.config.organization && this.config.project) {
+            try {
+                const health = await this.tidewaysClient.healthCheck();
+                if (health.status === 'healthy') {
+                    logger.info('Tideways API connection verified');
+                }
+                else {
+                    logger.warn('Tideways API health check failed, but starting server anyway', health);
+                }
             }
-            else {
-                logger.warn('Tideways API health check failed, but starting server anyway', health);
+            catch (error) {
+                logger.warn('Tideways API health check failed, but starting server anyway', {
+                    error: error.message,
+                });
             }
         }
-        catch (error) {
-            logger.warn('Tideways API health check failed, but starting server anyway', {
-                error: error.message,
-            });
+        else {
+            logger.warn('Tideways credentials not configured — server will list tools but tool calls will fail');
         }
         const transport = new StdioServerTransport();
         await this.server.connect(transport);

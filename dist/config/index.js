@@ -50,15 +50,16 @@ export function loadConfig() {
     return config;
 }
 function validateConfig(config) {
+    const warnings = [];
     const errors = [];
     if (!config.token) {
-        errors.push('TIDEWAYS_TOKEN environment variable is required');
+        warnings.push('TIDEWAYS_TOKEN environment variable is not set — tool calls will fail');
     }
     if (!config.organization) {
-        errors.push('TIDEWAYS_ORG environment variable is required');
+        warnings.push('TIDEWAYS_ORG environment variable is not set — tool calls will fail');
     }
     if (!config.project) {
-        errors.push('TIDEWAYS_PROJECT environment variable is required');
+        warnings.push('TIDEWAYS_PROJECT environment variable is not set — tool calls will fail');
     }
     if (config.maxRetries && (config.maxRetries < 0 || config.maxRetries > 10)) {
         errors.push('maxRetries must be between 0 and 10');
@@ -72,8 +73,24 @@ function validateConfig(config) {
     if (config.rateLimit !== undefined && config.rateLimit < 1) {
         errors.push('rateLimit must be at least 1');
     }
+    for (const warning of warnings) {
+        logger.warn(warning);
+    }
     if (errors.length > 0) {
         throw new Error(`Configuration validation failed:\n${errors.join('\n')}`);
+    }
+}
+export function validateCredentials(config) {
+    const missing = [];
+    if (!config.token)
+        missing.push('TIDEWAYS_TOKEN');
+    if (!config.organization)
+        missing.push('TIDEWAYS_ORG');
+    if (!config.project)
+        missing.push('TIDEWAYS_PROJECT');
+    if (missing.length > 0) {
+        throw new Error(`Missing required environment variables: ${missing.join(', ')}. ` +
+            'Set these variables to use Tideways MCP tools.');
     }
 }
 //# sourceMappingURL=index.js.map
