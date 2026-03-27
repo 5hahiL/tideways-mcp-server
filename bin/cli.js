@@ -29,6 +29,13 @@ Environment Variables (required):
   TIDEWAYS_ORG       Your Tideways organization name
   TIDEWAYS_PROJECT   Your Tideways project name
 
+Environment Variables (optional):
+  TIDEWAYS_RATE_LIMIT      API requests per hour limit (default: 2500)
+  TIDEWAYS_MAX_RETRIES     Max retry attempts (default: 3)
+  TIDEWAYS_REQUEST_TIMEOUT Request timeout in ms (default: 30000)
+  TIDEWAYS_BASE_URL        API base URL
+  LOG_LEVEL                Log level: debug, info, warn, error (default: info)
+
 Examples:
   # Start MCP server
   npx ${packageJson.name}
@@ -69,19 +76,6 @@ async function main() {
         console.error('Use --help for usage information');
         process.exit(1);
     }
-  }
-  
-  const requiredEnvVars = ['TIDEWAYS_TOKEN', 'TIDEWAYS_ORG', 'TIDEWAYS_PROJECT'];
-  const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
-  
-  if (missingVars.length > 0) {
-    console.error('Error: Missing required environment variables:');
-    missingVars.forEach(varName => {
-      console.error(`  ${varName}`);
-    });
-    console.error('\nPlease set these environment variables and try again.');
-    console.error('Use --help for more information.');
-    process.exit(1);
   }
   
   try {

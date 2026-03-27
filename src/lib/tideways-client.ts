@@ -20,7 +20,7 @@ class RateLimiter {
   private maxRequests: number;
   private windowMs: number;
 
-  constructor(maxRequests = 900, windowMs = 3600000) {
+  constructor(maxRequests = 2500, windowMs = 3600000) {
     this.maxRequests = maxRequests;
     this.windowMs = windowMs;
   }
@@ -57,7 +57,7 @@ export class TidewaysClient {
 
   constructor(config: TidewaysConfig) {
     this.config = config;
-    this.rateLimiter = new RateLimiter();
+    this.rateLimiter = new RateLimiter(config.rateLimit);
 
     this.client = axios.create({
       baseURL: config.baseUrl,
