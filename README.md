@@ -32,7 +32,7 @@ A Model Context Protocol (MCP) server that enables AI assistants to query [Tidew
 
 **This is an MCP (Model Context Protocol) server designed exclusively for AI assistants. It cannot be used as a standalone CLI tool.**
 
-The server integrates with AI assistants through MCP configuration using the npm package `tideways-mcp-server`.
+The server integrates with AI assistants through MCP configuration using the npm package `tideways-mcp`.
 
 ### Environment Variables
 
@@ -66,7 +66,7 @@ Add to your Claude Desktop MCP configuration file:
   "mcpServers": {
     "tideways": {
       "command": "npx",
-      "args": ["tideways-mcp-server"],
+      "args": ["tideways-mcp"],
       "env": {
         "TIDEWAYS_TOKEN": "your_token",
         "TIDEWAYS_ORG": "your_org",
@@ -82,7 +82,7 @@ Add to your Claude Desktop MCP configuration file:
 {
   "mcpServers": {
     "tideways": {
-      "command": "tideways-mcp-server",
+      "command": "tideways-mcp",
       "env": {
         "TIDEWAYS_TOKEN": "your_token",
         "TIDEWAYS_ORG": "your_org",
@@ -104,7 +104,7 @@ Cursor supports MCP through its settings. Add the server configuration in Cursor
 {
   "mcpServers": {
     "tideways": {
-      "command": "tideways-mcp-server",
+      "command": "tideways-mcp",
       "env": {
         "TIDEWAYS_TOKEN": "your_token",
         "TIDEWAYS_ORG": "your_org",
@@ -124,7 +124,7 @@ If using VS Code with an MCP-compatible extension:
   "mcp.servers": {
     "tideways": {
       "command": "npx",
-      "args": ["tideways-mcp-server"],
+      "args": ["tideways-mcp"],
       "env": {
         "TIDEWAYS_TOKEN": "your_token",
         "TIDEWAYS_ORG": "your_org",
