@@ -29,6 +29,7 @@ coverage/
 *.swp
 *.swo
 .history
+.claude/
 
 # OS
 .DS_Store

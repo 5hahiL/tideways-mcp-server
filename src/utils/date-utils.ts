@@ -1,4 +1,5 @@
 import { GetTracesParams } from '../types/index.js';
+
 export function formatDateForAPI(date: Date): string {
   return date.toISOString();
 }

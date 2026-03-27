@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
+import packageJson from '../../package.json';
 import {
   TidewaysConfig,
   TidewaysPerformanceData,
@@ -11,6 +12,8 @@ import {
 } from '../types/index.js';
 import { ErrorHandler, TidewaysAPIError } from './errors.js';
 import { logger } from './logger.js';
+
+const CLIENT_VERSION: string = (packageJson as unknown as { version: string }).version;
 
 class RateLimiter {
   private requests: number[] = [];
@@ -62,7 +65,7 @@ export class TidewaysClient {
       headers: {
         Authorization: `Bearer ${config.token}`,
         'Content-Type': 'application/json',
-        'User-Agent': 'Tideways-MCP-Server/0.1.0',
+        'User-Agent': `Tideways-MCP-Server/${CLIENT_VERSION}`,
       },
     });
 

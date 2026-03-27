@@ -14,8 +14,6 @@
     "outDir": "dist",
     "rootDir": "src",
     "resolveJsonModule": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
     "lib": ["ES2022"],
     "types": ["node", "jest"]
   },
