@@ -16,7 +16,6 @@ A Model Context Protocol (MCP) server that enables AI assistants to query [Tidew
 - **AI Assistant Integration**: Works with Claude Desktop, Cursor, Claude Code, and other MCP-compatible tools
 - **Real-time Performance Metrics**: Query current performance data with configurable rate limiting
 - **Trace Analysis**: List and filter traces with layer breakdown, bottleneck detection, and response time analysis
-- **Custom Annotation Support**: Filter traces by `$span->annotate()` values
 - **Issue Analysis**: Retrieve and analyze errors, exceptions, and performance issues
 - **Robust Error Handling**: Comprehensive error handling with user-friendly messages
 
@@ -244,7 +243,6 @@ Analyze individual trace samples for detailed bottleneck identification and perf
 - `max_response_time_ms` (optional): Maximum response time filter
 - `sort_by` (optional): "response_time", "date", "memory" (default: "response_time")
 - `sort_order` (optional): "ASC", "DESC" (default: "DESC")
-- `annotation` (optional): Filter by custom annotation value set via `$span->annotate()`. Best-effort — if the API does not support this parameter, results will be unfiltered rather than empty.
 
 **Conversational Examples:**
 ```

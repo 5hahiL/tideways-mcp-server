@@ -156,10 +156,6 @@ export function getToolDefinitions(): Tool[] {
             default: 'DESC',
             description: 'Sort order (DESC = slowest/newest first)',
           },
-          annotation: {
-            type: 'string',
-            description: 'Filter traces by a custom annotation value set via $span->annotate() in your code. Best-effort — if the API does not support this parameter, results will be unfiltered rather than empty.',
-          },
         },
         required: [],
       },

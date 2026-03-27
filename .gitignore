@@ -23,6 +23,9 @@ tests/**/*.d.ts.map
 coverage/
 *.lcov
 
+# MCP config (contains credentials)
+.mcp.json
+
 # IDE
 .vscode/
 .idea/

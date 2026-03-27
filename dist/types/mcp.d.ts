@@ -28,6 +28,5 @@ export interface GetTracesParams {
     max_response_time_ms?: number;
     sort_by?: 'response_time' | 'date' | 'memory';
     sort_order?: 'ASC' | 'DESC';
-    annotation?: string;
 }
 //# sourceMappingURL=mcp.d.ts.map

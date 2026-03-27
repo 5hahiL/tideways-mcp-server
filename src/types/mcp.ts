@@ -32,6 +32,5 @@ export interface GetTracesParams {
   max_response_time_ms?: number; // Maximum response time filter
   sort_by?: 'response_time' | 'date' | 'memory'; // Sort field
   sort_order?: 'ASC' | 'DESC'; // Sort order
-  annotation?: string; // Filter by custom annotation value
 }
 
