@@ -3,6 +3,8 @@
 [![CI/CD Pipeline](https://github.com/5hahiL/tideways-mcp-server/actions/workflows/ci.yml/badge.svg)](https://github.com/5hahiL/tideways-mcp-server/actions/workflows/ci.yml)
 [![Release](https://github.com/5hahiL/tideways-mcp-server/actions/workflows/release.yml/badge.svg)](https://github.com/5hahiL/tideways-mcp-server/actions/workflows/release.yml)
 [![Security Pipeline](https://github.com/5hahiL/tideways-mcp-server/actions/workflows/security.yml/badge.svg)](https://github.com/5hahiL/tideways-mcp-server/actions/workflows/security.yml)
+[![npm version](https://img.shields.io/npm/v/tideways-mcp.svg)](https://www.npmjs.com/package/tideways-mcp)
+[![npm downloads](https://img.shields.io/npm/dt/tideways-mcp.svg)](https://www.npmjs.com/package/tideways-mcp)
 
 A Model Context Protocol (MCP) server that enables AI assistants to query [Tideways](https://tideways.com/) performance monitoring data and provide conversational performance insights for PHP applications.
 
