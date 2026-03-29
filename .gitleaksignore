@@ -1,0 +1,3 @@
+# False positives: curl examples in README with placeholder "YOUR_TOKEN_HERE"
+3525fefc0e79f850eef7e5ff6a854a47e02badb9:README.md:curl-auth-header:427
+ff2592b8c670f722bd78dcec880fd539daa33ce3:README.md:curl-auth-header:441
